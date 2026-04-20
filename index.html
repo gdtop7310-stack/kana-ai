@@ -1,0 +1,2101 @@
+<!DOCTYPE html><html lang="ja"><head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Creative Academy｜画像・動画・音声AIスクール</title>
+<meta name="description" content="最新AIツールを全て学べる実践型オンラインスクール。YouTube収益化から個別コンサルまで、目的に合わせて選べる3つのプラン。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&amp;family=Montserrat:wght@500;700;800&amp;display=swap">
+<style>
+  :root {
+    --bg-primary: #0A0E1A;
+    --bg-secondary: #141927;
+    --bg-accent: #1E2438;
+    --text-primary: #FFFFFF;
+    --text-muted: #A8B0C2;
+    --text-dim: #6B7489;
+    --accent-gold: #D4AF37;
+    --accent-gold-dim: rgba(212, 175, 55, 0.2);
+    --accent-red: #E63946;
+    --accent-orange: #FF6B35;
+    --border-subtle: #2A3142;
+    --border-soft: rgba(255, 255, 255, 0.08);
+    --radius: 10px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "palt";
+    overflow-x: hidden;
+  }
+  .mono, .price, .num { font-family: 'Montserrat', sans-serif; letter-spacing: 0.02em; }
+  h1, h2, h3, h4 { font-weight: 700; line-height: 1.35; letter-spacing: 0.01em; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; border: none; background: none; cursor: pointer; color: inherit; }
+
+  /* Mobile-first frame: show as phone-like width on desktop previews */
+  .stage {
+    max-width: 420px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--bg-primary);
+    position: relative;
+    border-left: 1px solid var(--border-soft);
+    border-right: 1px solid var(--border-soft);
+  }
+  @media (max-width: 460px) { .stage { border: none; } }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    background: rgba(10, 14, 26, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .logo {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    font-size: 13px; letter-spacing: 0.14em;
+  }
+  .logo-mark {
+    width: 22px; height: 22px; border-radius: 4px;
+    border: 1px solid var(--accent-gold);
+    display: grid; place-items: center;
+    font-size: 10px; color: var(--accent-gold);
+    font-weight: 800;
+  }
+  .logo-mark::before { content: "A"; }
+  .menu-btn {
+    width: 34px; height: 34px;
+    display: grid; place-items: center;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+  }
+  .menu-btn span, .menu-btn span::before, .menu-btn span::after {
+    content: ""; display: block; width: 14px; height: 1px; background: #fff;
+  }
+  .menu-btn span { position: relative; }
+  .menu-btn span::before { position: absolute; top: -4px; }
+  .menu-btn span::after { position: absolute; top: 4px; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 64px 22px 72px;
+    overflow: hidden;
+    min-height: 640px;
+  }
+  .hero-canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+  .hero-gradient {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 70% 20%, rgba(212, 175, 55, 0.10), transparent 45%),
+      radial-gradient(circle at 20% 90%, rgba(255, 107, 53, 0.08), transparent 50%),
+      linear-gradient(180deg, rgba(10, 14, 26, 0) 0%, rgba(10, 14, 26, 0.6) 80%, var(--bg-primary) 100%);
+    z-index: 1; pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 2; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.22em; color: var(--accent-gold);
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid var(--accent-gold-dim);
+    border-radius: 100px;
+    background: rgba(212, 175, 55, 0.04);
+  }
+  .hero-eyebrow::before {
+    content: ""; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--accent-gold);
+    box-shadow: 0 0 8px var(--accent-gold);
+  }
+
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.45;
+    margin: 22px 0 20px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 .br { display: block; }
+  .hero h1 .accent {
+    background: linear-gradient(135deg, #F5D97D 0%, var(--accent-gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-sub {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.85;
+    margin-bottom: 32px;
+    text-wrap: pretty;
+  }
+
+  .hero-cta { display: flex; flex-direction: column; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 16px 22px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary {
+    background: var(--accent-orange);
+    color: #fff;
+    box-shadow: 0 10px 28px -12px rgba(255, 107, 53, 0.5);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 32px -10px rgba(255, 107, 53, 0.6); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+  }
+  .btn-ghost:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+  .btn-arrow { transition: transform 0.3s var(--ease); }
+  .btn:hover .btn-arrow { transform: translateX(3px); }
+
+  .hero-visual {
+    margin-top: 40px;
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
+    border: 1px solid var(--border-subtle);
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.08);
+  }
+  .hero-visual video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-visual::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(10,14,26,0.7) 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .hero-visual-tag {
+    position: absolute;
+    left: 14px; bottom: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--accent-gold);
+    z-index: 3;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-visual-tag::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .hero-stats {
+    margin-top: 28px;
+    display: flex; gap: 0;
+    border-top: 1px solid var(--border-soft);
+    padding-top: 22px;
+  }
+  .hero-stats > div {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid var(--border-soft);
+  }
+  .hero-stats > div:last-child { border-right: none; }
+  .hero-stats .n {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--accent-gold);
+    display: block;
+  }
+  .hero-stats .l {
+    font-size: 10px; color: var(--text-dim);
+    letter-spacing: 0.15em;
+    margin-top: 4px;
+  }
+
+  /* ---------- SECTION ---------- */
+  section { padding: 64px 22px; position: relative; }
+  .section-head { margin-bottom: 36px; }
+  .section-kicker {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+  }
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 14px;
+    line-height: 1.85;
+  }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+    margin: 0 22px;
+  }
+
+  /* ---------- PLANS ---------- */
+  #plans { background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); }
+  .plan-cards { display: flex; flex-direction: column; gap: 18px; }
+  .plan-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    position: relative;
+    transition: transform 0.4s var(--ease), border-color 0.3s var(--ease);
+  }
+  .plan-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.4); }
+  .plan-card.featured {
+    border-color: var(--accent-gold);
+    background:
+      linear-gradient(180deg, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+      var(--bg-secondary);
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.3), 0 20px 60px -20px rgba(212, 175, 55, 0.2);
+  }
+  .plan-badge {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .plan-card.featured .plan-badge {
+    color: var(--bg-primary);
+    background: var(--accent-gold);
+    border-color: var(--accent-gold);
+  }
+  .plan-name {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .plan-tagline {
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-bottom: 22px;
+  }
+  .plan-price {
+    display: flex; align-items: baseline; gap: 4px;
+    margin-bottom: 6px;
+  }
+  .plan-price .yen { font-size: 16px; color: var(--text-muted); }
+  .plan-price .amount {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px; font-weight: 800;
+    color: var(--text-primary);
+  }
+  .plan-card.featured .plan-price .amount { color: var(--accent-gold); }
+  .plan-price .tax { font-size: 11px; color: var(--text-dim); margin-left: 4px; }
+  .plan-period {
+    font-size: 11px;
+    color: var(--text-dim);
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--border-soft);
+    letter-spacing: 0.08em;
+  }
+  .plan-features {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 12px;
+    margin-bottom: 26px;
+  }
+  .plan-features li {
+    display: flex; gap: 10px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .plan-features .check {
+    flex-shrink: 0;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--accent-gold);
+    display: grid; place-items: center;
+    font-size: 9px;
+    margin-top: 3px;
+  }
+  .plan-cta {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.3s var(--ease);
+    background: transparent;
+  }
+  .plan-cta:hover { background: var(--accent-orange); border-color: var(--accent-orange); }
+  .plan-card.featured .plan-cta {
+    background: var(--accent-orange);
+    border-color: var(--accent-orange);
+  }
+  .plan-card.featured .plan-cta:hover { background: #FF8255; border-color: #FF8255; }
+
+  /* ---------- PAIN POINTS ---------- */
+  #pain { background: var(--bg-primary); }
+  .pain-list {
+    display: flex; flex-direction: column; gap: 2px;
+    border-top: 1px solid var(--border-soft);
+    margin-bottom: 32px;
+  }
+  .pain-item {
+    padding: 20px 4px 20px 52px;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 13.5px;
+    color: var(--text-muted);
+    position: relative;
+    line-height: 1.7;
+  }
+  .pain-item::before {
+    content: attr(data-n);
+    position: absolute;
+    left: 4px; top: 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: var(--accent-gold);
+    letter-spacing: 0.1em;
+  }
+  .pain-conclusion {
+    text-align: center;
+    padding: 32px 12px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.7;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+  }
+  .pain-conclusion .highlight {
+    color: var(--accent-gold);
+    font-size: 18px;
+    display: block;
+    margin-top: 6px;
+  }
+
+  /* ---------- PLAN DETAILS ---------- */
+  #details { background: var(--bg-secondary); }
+  .detail-block {
+    margin-bottom: 48px;
+  }
+  .detail-block:last-child { margin-bottom: 0; }
+  .detail-head {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 18px;
+  }
+  .detail-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: var(--accent-gold);
+    letter-spacing: 0.2em;
+  }
+  .detail-title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .detail-sub {
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  .modules {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .module {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 13px;
+    transition: background 0.25s var(--ease);
+  }
+  .module:last-child { border-bottom: none; }
+  .module:hover { background: rgba(212, 175, 55, 0.03); }
+  .module-n {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--accent-gold);
+    letter-spacing: 0.15em;
+  }
+  .module-name { color: var(--text-primary); font-weight: 500; }
+  .bonus {
+    margin-top: 18px;
+    padding: 16px;
+    border: 1px dashed var(--accent-gold-dim);
+    border-radius: 8px;
+    background: rgba(212, 175, 55, 0.03);
+  }
+  .bonus-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--accent-gold);
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+  }
+  .bonus ul { list-style: none; }
+  .bonus li {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    padding: 4px 0 4px 18px;
+    position: relative;
+  }
+  .bonus li::before {
+    content: "+";
+    position: absolute; left: 0;
+    color: var(--accent-gold);
+    font-weight: 700;
+  }
+  .roadmap { display: flex; flex-direction: column; gap: 14px; }
+  .road {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 16px;
+    position: relative;
+    padding-left: 54px;
+  }
+  .road .month {
+    position: absolute; left: 16px; top: 16px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    display: grid; place-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .road .month-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--accent-gold);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+  .road .content {
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.7;
+  }
+
+  /* ---------- REASONS ---------- */
+  #reasons { background: var(--bg-primary); }
+  .reason {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .reason:last-child { border-bottom: none; }
+  .reason-n {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent-gold);
+    line-height: 1;
+  }
+  .reason-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .reason-body {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* ---------- OWNER ---------- */
+  #owner { background: var(--bg-secondary); }
+  .owner-card {
+    display: flex; flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 20px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+  }
+  .owner-photo {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: #F5F0E4;
+    border: 2px solid var(--accent-gold-dim);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5), 0 0 0 6px rgba(212,175,55,0.04);
+  }
+  .owner-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .owner-name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .owner-role {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--accent-gold);
+    letter-spacing: 0.2em;
+    margin-bottom: 22px;
+  }
+  .owner-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 22px;
+    text-align: left;
+  }
+  .owner-mission {
+    border-top: 1px solid var(--border-soft);
+    padding-top: 18px;
+    text-align: left;
+    width: 100%;
+  }
+  .owner-mission-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--accent-gold);
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+  }
+  .owner-contact {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-soft);
+    width: 100%;
+    text-align: left;
+  }
+
+  /* ---------- TESTIMONIALS (CAROUSEL) ---------- */
+  #testimonials { background: var(--bg-primary); padding-left: 0; padding-right: 0; }
+  #testimonials .section-head { padding: 0 22px; }
+  .testi-carousel {
+    position: relative;
+    margin-top: 8px;
+  }
+  .testi-track {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 22px 16px;
+    scroll-padding-left: 22px;
+    scrollbar-width: none;
+  }
+  .testi-track::-webkit-scrollbar { display: none; }
+  .testi {
+    flex: 0 0 calc(100% - 52px);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius);
+    padding: 28px 22px 22px;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column;
+    position: relative;
+    min-height: 280px;
+    transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .testi.is-active { border-color: var(--accent-gold-dim); }
+  .testi-quote {
+    font-family: 'Montserrat', serif;
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent-gold);
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+  .testi-change {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 10px;
+    margin-bottom: 14px;
+    padding: 6px 10px;
+    background: rgba(212, 175, 55, 0.06);
+    border: 1px solid var(--accent-gold-dim);
+    border-radius: 100px;
+    font-family: 'Montserrat', sans-serif;
+    align-self: flex-start;
+  }
+  .testi-change .before { color: var(--text-dim); }
+  .testi-change .arrow { color: var(--accent-gold); }
+  .testi-change .after { color: var(--accent-gold); font-weight: 700; }
+  .testi-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    flex: 1;
+    margin-bottom: 20px;
+  }
+  .testi-footer {
+    display: flex; align-items: center; gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .testi-initial {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--bg-accent), var(--bg-secondary));
+    border: 1px solid var(--accent-gold-dim);
+    display: grid; place-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-gold);
+    flex-shrink: 0;
+  }
+  .testi-meta .name { font-size: 13px; font-weight: 700; }
+  .testi-meta .who { font-size: 10px; color: var(--text-dim); letter-spacing: 0.08em; margin-top: 2px; }
+
+  .testi-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 22px 0;
+    margin-top: 8px;
+  }
+  .testi-dots {
+    display: flex; gap: 6px;
+  }
+  .testi-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border-subtle);
+    transition: all 0.25s var(--ease);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+  }
+  .testi-dot.active {
+    background: var(--accent-gold);
+    width: 20px;
+    border-radius: 4px;
+  }
+  .testi-nav {
+    display: flex; gap: 8px;
+  }
+  .testi-arrow {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    display: grid; place-items: center;
+    transition: all 0.25s var(--ease);
+    background: transparent;
+    font-size: 14px;
+  }
+  .testi-arrow:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+  }
+  .testi-arrow:disabled {
+    opacity: 0.3; cursor: not-allowed;
+  }
+  .testi-count {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    margin-left: 12px;
+  }
+  .testi-count .cur { color: var(--accent-gold); font-weight: 700; }
+
+  /* ---------- FAQ ---------- */
+  #faq { background: var(--bg-secondary); }
+  .faq-list { display: flex; flex-direction: column; gap: 2px; }
+  .faq-item {
+    border-top: 1px solid var(--border-soft);
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--border-soft); }
+  .faq-q {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px 4px;
+    text-align: left;
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.6;
+    transition: color 0.25s var(--ease);
+  }
+  .faq-q:hover { color: var(--accent-gold); }
+  .faq-q .q-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    color: var(--accent-gold);
+    font-weight: 700;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .faq-q .q-text { flex: 1; }
+  .faq-q .q-toggle {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    position: relative;
+    margin-top: 4px;
+  }
+  .faq-q .q-toggle::before,
+  .faq-q .q-toggle::after {
+    content: ""; position: absolute;
+    background: var(--text-muted);
+    transition: transform 0.3s var(--ease);
+  }
+  .faq-q .q-toggle::before {
+    width: 12px; height: 1px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .faq-q .q-toggle::after {
+    width: 1px; height: 12px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .faq-item.open .q-toggle::after { transform: translate(-50%, -50%) scaleY(0); }
+  .faq-item.open .q-toggle::before { background: var(--accent-gold); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s var(--ease);
+  }
+  .faq-a-inner {
+    padding: 0 4px 20px 30px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.85;
+  }
+  .faq-a-inner .a-label {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--accent-orange);
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  /* ---------- FORM ---------- */
+  #form-section { background: var(--bg-primary); }
+  .form-intro {
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, transparent 100%);
+    border: 1px solid var(--accent-gold-dim);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .form-intro-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--accent-gold);
+    letter-spacing: 0.25em;
+    margin-bottom: 10px;
+  }
+  .form-intro-text {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  form { display: flex; flex-direction: column; gap: 24px; }
+  .field-group { display: flex; flex-direction: column; gap: 10px; }
+  .field-label {
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .req {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    color: var(--accent-orange);
+    padding: 2px 6px;
+    border: 1px solid var(--accent-orange);
+    border-radius: 3px;
+    letter-spacing: 0.1em;
+  }
+  .opt {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    color: var(--text-dim);
+    padding: 2px 6px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    letter-spacing: 0.1em;
+  }
+  .radio-group, .check-group { display: flex; flex-direction: column; gap: 8px; }
+  .radio, .check {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s var(--ease);
+    font-size: 13px;
+  }
+  .radio:hover, .check:hover { border-color: var(--accent-gold-dim); }
+  .radio input, .check input { display: none; }
+  .radio-dot, .check-box {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border-subtle);
+    margin-top: 2px;
+    position: relative;
+    transition: border-color 0.25s var(--ease);
+  }
+  .radio-dot { border-radius: 50%; }
+  .check-box { border-radius: 4px; }
+  .radio input:checked ~ .radio-dot,
+  .check input:checked ~ .check-box { border-color: var(--accent-orange); }
+  .radio input:checked ~ .radio-dot::after {
+    content: ""; position: absolute;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent-orange);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .check input:checked ~ .check-box::after {
+    content: "✓"; position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--accent-orange);
+    font-size: 12px; font-weight: 700;
+  }
+  .radio-content { flex: 1; }
+  .radio-content .main { font-weight: 500; }
+  .radio-content .sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+  .radio.selected { border-color: var(--accent-orange); background: rgba(255, 107, 53, 0.05); }
+
+  .input, .textarea, .select {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 13px;
+    transition: border-color 0.25s var(--ease);
+  }
+  .input:focus, .textarea:focus, .select:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+  }
+  .input::placeholder, .textarea::placeholder { color: var(--text-dim); }
+  .textarea { resize: vertical; min-height: 100px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .field-hint {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .agreement {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .agreement .check { background: transparent; border: none; padding: 8px 0; }
+  .agreement .check:hover { border-color: transparent; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 20px;
+    background: var(--accent-orange);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 28px -12px rgba(255, 107, 53, 0.55);
+    transition: all 0.3s var(--ease);
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 32px -10px rgba(255, 107, 53, 0.65); }
+  .trust-row {
+    margin-top: 22px;
+    display: flex; flex-direction: column; gap: 12px;
+    padding: 18px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+  }
+  .trust {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .trust-ico {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--accent-gold);
+    display: grid; place-items: center;
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: #06080F;
+    padding: 48px 22px 32px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .foot-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 20px;
+    color: var(--accent-gold);
+  }
+  .foot-info {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 2;
+    padding: 20px 0;
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .foot-info .label {
+    color: var(--text-dim);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    display: inline-block;
+    width: 72px;
+  }
+  .foot-links {
+    display: flex; flex-direction: column; gap: 14px;
+    padding: 24px 0;
+    font-size: 12px;
+  }
+  .foot-links a {
+    color: var(--text-muted);
+    transition: color 0.25s var(--ease);
+  }
+  .foot-links a:hover { color: var(--accent-gold); }
+  .foot-copy {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  /* ---------- TWEAKS PANEL ---------- */
+  .tweaks-panel {
+    position: fixed;
+    bottom: 16px; right: 16px;
+    z-index: 100;
+    background: rgba(20, 25, 39, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--accent-gold-dim);
+    border-radius: 10px;
+    padding: 16px;
+    min-width: 220px;
+    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.6);
+    display: none;
+  }
+  .tweaks-panel.active { display: block; }
+  .tweaks-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent-gold);
+    margin-bottom: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .tweaks-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .tweaks-options { display: flex; gap: 6px; }
+  .tweaks-btn {
+    flex: 1;
+    padding: 8px;
+    font-size: 10px;
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.08em;
+    transition: all 0.25s var(--ease);
+  }
+  .tweaks-btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
+  .tweaks-btn.active {
+    background: var(--accent-gold);
+    color: var(--bg-primary);
+    border-color: var(--accent-gold);
+  }
+
+  /* ---------- HERO LAYOUTS (tweak variants) ---------- */
+  /* default: left */
+  .hero[data-layout="left"] .hero-inner { text-align: left; }
+  .hero[data-layout="left"] .hero-cta { align-items: stretch; }
+
+  .hero[data-layout="center"] .hero-inner { text-align: center; }
+  .hero[data-layout="center"] .hero-stats { text-align: center; }
+  .hero[data-layout="center"] .hero-visual { margin-left: auto; margin-right: auto; max-width: 280px; }
+
+  .hero[data-layout="split"] .hero-inner { text-align: left; }
+  .hero[data-layout="split"] .hero-visual {
+    margin-top: 28px; aspect-ratio: 1/1;
+  }
+  .hero[data-layout="split"] .hero-stats { display: none; }
+
+  /* fade-in observe */
+  .reveal { opacity: 0; transform: translateY(20px); transition: all 0.7s var(--ease); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* scroll indicator */
+  .scroll-ind {
+    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px; letter-spacing: 0.3em;
+    color: var(--text-dim);
+    writing-mode: vertical-rl;
+    padding-bottom: 40px;
+    z-index: 2;
+  }
+  .scroll-ind::after {
+    content: ""; position: absolute;
+    bottom: 0; left: 50%;
+    width: 1px; height: 32px;
+    background: linear-gradient(180deg, var(--text-dim), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+</style>
+<link id="gfont-Architects-Daughter" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Architects+Daughter:wght@300;400;500;600;700&amp;display=swap"><link id="gfont-Pacifico" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico:wght@300;400;500;600;700&amp;display=swap"><link id="gfont-Dosis" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700&amp;display=swap"></head>
+<body data-cc-id="cc-1" style="cursor: crosshair; background-color: rgb(16, 21, 38); font-family: Dosis;">
+
+<div class="stage">
+  <!-- NAV -->
+  <nav class="nav" data-screen-label="Nav">
+    <div class="logo">
+      <div class="logo-mark"></div>
+      <span>AI CREATIVE ACADEMY</span>
+    </div>
+    <button class="menu-btn" aria-label="menu"><span></span></button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" data-layout="center" data-screen-label="01 Hero">
+    <canvas class="hero-canvas" id="particles" width="836" height="1888" style="width: 418px; height: 944.352px;"></canvas>
+    <div class="hero-gradient"></div>
+    <div class="hero-inner">
+      <span class="hero-eyebrow">CREATIVE × AI ACADEMY</span>
+      <h1>
+        <span class="br">AIで、あなたの</span>
+        <span class="br">ビジネスを</span>
+        <span class="br accent">次のステージへ。</span>
+      </h1>
+      <p class="hero-sub">
+        画像生成・動画生成・音声生成 — 最新AIツールを全て学べる、実践型オンラインスクール。目的に合わせて選べる3つのプランで、初心者から法人まで。
+      </p>
+      <div class="hero-cta">
+        <a href="#plans" class="btn btn-primary">
+          プランを見る <span class="btn-arrow">→</span>
+        </a>
+        <a href="#form-section" class="btn btn-ghost">
+          無料相談する
+        </a>
+      </div>
+      <div class="hero-visual">
+        <video src="assets/hero.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <span class="hero-visual-tag">NOW STREAMING</span>
+      </div>
+      <div class="hero-stats">
+        <div><span class="n">50+</span><div class="l">LESSONS</div></div>
+        <div><span class="n">9</span><div class="l">AI TOOLS</div></div>
+        <div><span class="n">24/7</span><div class="l">UPDATES</div></div>
+      </div>
+    </div>
+    <div class="scroll-ind">SCROLL</div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="plans" data-screen-label="02 Plans">
+    <div class="section-head">
+      <span class="section-kicker">— PLANS</span>
+      <h2 class="section-title">3つのプランから、<br>最適な学びを。</h2>
+      <p class="section-sub">独学で始めたい方から、本格的な個別コンサルまで。目的とゴールに合わせて選べる3つのプランをご用意しています。</p>
+    </div>
+
+    <div class="plan-cards">
+      <!-- Plan 1 -->
+      <div class="plan-card reveal in" data-plan="course">
+        <span class="plan-badge">入門・独学向け</span>
+        <h3 class="plan-name">AI Creative講座</h3>
+        <p class="plan-tagline">買い切り・無期限アクセス</p>
+        <div class="plan-price">
+          <span class="yen">¥</span>
+          <span class="amount">49,800</span>
+          <span class="tax">tax in</span>
+        </div>
+        <div class="plan-period">ONE-TIME PURCHASE</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span>50本以上の動画講座</li>
+          <li><span class="check">✓</span>MidJourney / Flux / Kling / Runway / Higgsfield / Voice Peak / Sync / Hedra 対応</li>
+          <li><span class="check">✓</span>随時アップデート対応</li>
+          <li><span class="check">✓</span>スマホ視聴OK</li>
+          <li><span class="check">✓</span>受講生コミュニティ招待</li>
+        </ul>
+        <button class="plan-cta" data-select-plan="course">このプランで申し込む</button>
+      </div>
+
+      <!-- Plan 2 (Featured) -->
+      <div class="plan-card featured reveal in" data-plan="youtube-3m">
+        <span class="plan-badge">🔥 人気 NO.1</span>
+        <h3 class="plan-name">YouTube収益化プラン</h3>
+        <p class="plan-tagline">3ヶ月の個別コンサル付き</p>
+        <div class="plan-price">
+          <span class="yen">¥</span>
+          <span class="amount">330,000</span>
+          <span class="tax">tax in</span>
+        </div>
+        <div class="plan-period">3 MONTHS PROGRAM</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span>週1回の個別コンサル（60分 × 12回）</li>
+          <li><span class="check">✓</span>チャンネル設計・コンセプト策定</li>
+          <li><span class="check">✓</span>台本・サムネイル添削無制限</li>
+          <li><span class="check">✓</span>トレンド分析・企画支援</li>
+          <li><span class="check">✓</span>AI動画制作ツール完全レクチャー</li>
+          <li><span class="check">✓</span>収益化達成までフルサポート</li>
+        </ul>
+        <button class="plan-cta" data-select-plan="youtube-3m">このプランで申し込む</button>
+      </div>
+
+      <!-- Plan 3 -->
+      <div class="plan-card reveal in" data-plan="youtube-6m">
+        <span class="plan-badge">プレミアム</span>
+        <h3 class="plan-name">YouTube総合コンサルプラン</h3>
+        <p class="plan-tagline">6ヶ月の総合サポート</p>
+        <div class="plan-price">
+          <span class="yen">¥</span>
+          <span class="amount">550,000</span>
+          <span class="tax">tax in</span>
+        </div>
+        <div class="plan-period">6 MONTHS PROGRAM</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span>週2回の個別コンサル（60分 × 48回）</li>
+          <li><span class="check">✓</span>複数チャンネル運用戦略</li>
+          <li><span class="check">✓</span>AI動画自動化パイプライン構築支援</li>
+          <li><span class="check">✓</span>収益最大化・スケーリング戦略</li>
+          <li><span class="check">✓</span>3ヶ月プランの全内容を含む</li>
+        </ul>
+        <button class="plan-cta" data-select-plan="youtube-6m">このプランで申し込む</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN POINTS -->
+  <section id="pain" data-screen-label="03 Pain">
+    <div class="section-head">
+      <span class="section-kicker">— FOR YOU</span>
+      <h2 class="section-title">こんなあなたへ。</h2>
+    </div>
+    <div class="pain-list">
+      <div class="pain-item reveal in" data-n="01">YouTubeを始めたいが、何から手をつければいいか分からない</div>
+      <div class="pain-item reveal in" data-n="02">動画編集に時間がかかりすぎて、本業に支障が出ている</div>
+      <div class="pain-item reveal in" data-n="03">AIツールが多すぎて、結局どれを使えばいいか迷っている</div>
+      <div class="pain-item reveal in" data-n="04">チャンネルを伸ばしたいが、独学の限界を感じている</div>
+      <div class="pain-item reveal in" data-n="05">収益化できる確信がほしい</div>
+    </div>
+    <div class="pain-conclusion">
+      — そんなあなたのために、<br>
+      <span class="highlight">設計されたプランです。</span>
+    </div>
+  </section>
+
+  <!-- PLAN DETAILS -->
+  <section id="details" data-screen-label="04 Details">
+    <div class="section-head">
+      <span class="section-kicker">— CURRICULUM</span>
+      <h2 class="section-title">各プランの<br>詳細内容。</h2>
+    </div>
+
+    <!-- Course modules -->
+    <div class="detail-block reveal in">
+      <div class="detail-head">
+        <span class="detail-num">01 /</span>
+        <span class="detail-title">AI Creative講座</span>
+      </div>
+      <p class="detail-sub">全10モジュール・50本以上の動画講座</p>
+      <div class="modules">
+        <div class="module"><span class="module-n">M-01</span><span class="module-name">イントロダクション</span></div>
+        <div class="module"><span class="module-n">M-02</span><span class="module-name">MidJourney</span></div>
+        <div class="module"><span class="module-n">M-03</span><span class="module-name">Flux</span></div>
+        <div class="module"><span class="module-n">M-04</span><span class="module-name">Kling</span></div>
+        <div class="module"><span class="module-n">M-05</span><span class="module-name">Runway Gen 4</span></div>
+        <div class="module"><span class="module-n">M-06</span><span class="module-name">Higgsfield</span></div>
+        <div class="module"><span class="module-n">M-07</span><span class="module-name">Voice Peak</span></div>
+        <div class="module"><span class="module-n">M-08</span><span class="module-name">Sync</span></div>
+        <div class="module"><span class="module-n">M-09</span><span class="module-name">Hedra</span></div>
+        <div class="module"><span class="module-n">M-10</span><span class="module-name">AI Creative Lab（随時追加）</span></div>
+      </div>
+      <div class="bonus">
+        <div class="bonus-label">SPECIAL BONUS</div>
+        <ul>
+          <li>画像プロンプトメーカー</li>
+          <li>映像提出AI検閲アシスタント</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3-month roadmap -->
+    <div class="detail-block reveal in">
+      <div class="detail-head">
+        <span class="detail-num">02 /</span>
+        <span class="detail-title">YouTube収益化プラン</span>
+      </div>
+      <p class="detail-sub">3ヶ月の月別ロードマップ</p>
+      <div class="roadmap">
+        <div class="road reveal in">
+          <div class="month">1</div>
+          <div class="month-label">MONTH 01</div>
+          <div class="content">チャンネル設計 + コンセプト確立 + 初動10本制作</div>
+        </div>
+        <div class="road reveal in">
+          <div class="month">2</div>
+          <div class="month-label">MONTH 02</div>
+          <div class="content">分析改善 + AI自動化導入 + 収益化申請準備</div>
+        </div>
+        <div class="road reveal in">
+          <div class="month">3</div>
+          <div class="month-label">MONTH 03</div>
+          <div class="content">収益化達成 + スケーリング戦略</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6-month -->
+    <div class="detail-block reveal in">
+      <div class="detail-head">
+        <span class="detail-num">03 /</span>
+        <span class="detail-title">YouTube総合コンサルプラン</span>
+      </div>
+      <p class="detail-sub">3ヶ月プランの全内容 + 以下のプレミアム特典</p>
+      <div class="modules">
+        <div class="module"><span class="module-n">+01</span><span class="module-name">複数チャンネル運用戦略</span></div>
+        <div class="module"><span class="module-n">+02</span><span class="module-name">法人案件獲得サポート</span></div>
+        <div class="module"><span class="module-n">+03</span><span class="module-name">AI自動化パイプライン構築</span></div>
+        <div class="module"><span class="module-n">+04</span><span class="module-name">スケーリング戦略</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REASONS -->
+  <section id="reasons" data-screen-label="05 Reasons">
+    <div class="section-head">
+      <span class="section-kicker">— WHY US</span>
+      <h2 class="section-title">選ばれる<br>5つの理由。</h2>
+    </div>
+    <div class="reason reveal in">
+      <div class="reason-n">01</div>
+      <div>
+        <div class="reason-title">最新AIツールを網羅</div>
+        <div class="reason-body">MidJourney、Kling、Runwayなど、業界の最前線で使われるツールを全てカバー。アップデートも随時反映。</div>
+      </div>
+    </div>
+    <div class="reason reveal in">
+      <div class="reason-n">02</div>
+      <div>
+        <div class="reason-title">実践型カリキュラム</div>
+        <div class="reason-body">座学だけではなく、実際の案件・チャンネル運用を想定した実践課題で、すぐ使えるスキルが身につく。</div>
+      </div>
+    </div>
+    <div class="reason reveal in">
+      <div class="reason-n">03</div>
+      <div>
+        <div class="reason-title">現役クリエイター陣による監修</div>
+        <div class="reason-body">AI動画業界の第一線で活動するクリエイター陣がカリキュラムを監修。最新の現場ノウハウを凝縮。</div>
+      </div>
+    </div>
+    <div class="reason reveal in">
+      <div class="reason-n">04</div>
+      <div>
+        <div class="reason-title">個別サポート体制</div>
+        <div class="reason-body">プランに応じて、個別コンサル・質問対応・添削など手厚いサポートで挫折させません。</div>
+      </div>
+    </div>
+    <div class="reason reveal in">
+      <div class="reason-n">05</div>
+      <div>
+        <div class="reason-title">買い切り＆アップデート保証</div>
+        <div class="reason-body">買い切りプランは無期限アクセス可能。新ツールが登場したら随時講座も追加。追加費用不要。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OWNER -->
+  <section id="owner" data-screen-label="06 Owner">
+    <div class="section-head">
+      <span class="section-kicker">— FOUNDER</span>
+      <h2 class="section-title">運営者紹介。</h2>
+    </div>
+    <div class="owner-card">
+      <div class="owner-photo"><img src="assets/owner.png" alt="代表 プロフィール" /></div>
+      <div class="owner-name">平山 加菜</div>
+      <div class="owner-role">AI CREATIVE ACADEMY / 代表</div>
+      <div class="owner-body">
+        AI技術の可能性に魅了され、クリエイター向けの教育プログラムを運営。初心者でも実践的なスキルを身につけられるカリキュラムを提供しています。
+      </div>
+      <div class="owner-mission">
+        <div class="owner-mission-label">MISSION</div>
+        <div class="owner-body" style="margin-bottom: 0;">
+          AI時代において誰もがクリエイターになれる — その可能性を最大限に引き出すための学びの場を提供することを使命としています。
+        </div>
+      </div>
+      <div class="owner-contact">
+        ✉ kanamasa5655@gmail.com
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" data-screen-label="07 Testimonials">
+    <div class="section-head">
+      <span class="section-kicker">— VOICES</span>
+      <h2 class="section-title">受講生の声。</h2>
+    </div>
+    <div class="testi-carousel">
+      <div class="testi-track" id="testi-track">
+        <div class="testi">
+          <div class="testi-quote">&rdquo;</div>
+          <span class="testi-change"><span class="before">編集に8時間</span><span class="arrow">→</span><span class="after">編集2時間</span></span>
+          <div class="testi-body">最初はAIツールが多すぎて、どこから手をつけていいか分からない状態でした。受講後は体系的に整理されたカリキュラムで一つずつ理解でき、初心者でも分かりやすく、動画編集の時間が1/3に。空いた時間で別の動画制作も進められるようになりました。</div>
+          <div class="testi-footer">
+            <div class="testi-initial">TK</div>
+            <div class="testi-meta"><div class="name">T.K様</div><div class="who">30代・会社員</div></div>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi-quote">&rdquo;</div>
+          <span class="testi-change"><span class="before">副業月3万</span><span class="arrow">→</span><span class="after">月20万+</span></span>
+          <div class="testi-body">AIツールの使い方が体系的に学べて、副業収入が月20万円を超えました。個別コンサルで毎週進捗を見てもらえるので、軌道修正がとにかく早い。本業を超える日も近いと感じています。受講して本当に良かった。</div>
+          <div class="testi-footer">
+            <div class="testi-initial">MS</div>
+            <div class="testi-meta"><div class="name">M.S様</div><div class="who">40代・個人事業主</div></div>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi-quote">&rdquo;</div>
+          <span class="testi-change"><span class="before">登録者200</span><span class="arrow">→</span><span class="after">1.2万人</span></span>
+          <div class="testi-body">3ヶ月で登録者が6倍に。個別コンサルで企画の方向性が一気にクリアになりました。サムネやタイトル添削も無制限で、毎回の投稿が検証のサイクルになっています。伸び悩んでいた方にこそ試してほしい。</div>
+          <div class="testi-footer">
+            <div class="testi-initial">YA</div>
+            <div class="testi-meta"><div class="name">Y.A様</div><div class="who">20代・クリエイター</div></div>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi-quote">&rdquo;</div>
+          <span class="testi-change"><span class="before">社内動画外注</span><span class="arrow">→</span><span class="after">内製化完了</span></span>
+          <div class="testi-body">法人プランで社内の動画制作を完全内製化。コスト削減と同時にスピードも格段に上がりました。AI活用の最新情報が随時入ってくるのも、経営判断の材料としてありがたい。総合コンサルの価値は十分あります。</div>
+          <div class="testi-footer">
+            <div class="testi-initial">HT</div>
+            <div class="testi-meta"><div class="name">H.T様</div><div class="who">50代・経営者</div></div>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi-quote">&rdquo;</div>
+          <span class="testi-change"><span class="before">AI未経験</span><span class="arrow">→</span><span class="after">案件単価3倍</span></span>
+          <div class="testi-body">最新AIツールが一気に学べて、クライアントへの提案の幅が広がりました。単価も3倍に。何よりAIに対する苦手意識が完全になくなり、新しいツールが出ても自分で学べる土台ができたのが大きい。</div>
+          <div class="testi-footer">
+            <div class="testi-initial">NK</div>
+            <div class="testi-meta"><div class="name">N.K様</div><div class="who">30代・フリーランス</div></div>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi-quote">&rdquo;</div>
+          <span class="testi-change"><span class="before">独学で挫折</span><span class="arrow">→</span><span class="after">収益化達成</span></span>
+          <div class="testi-body">独学で1年伸び悩んでいましたが、3ヶ月プランで一気に収益化までたどり着けました。もっと早く受講すれば良かったというのが正直な感想。投資以上のリターンが確実にあります。</div>
+          <div class="testi-footer">
+            <div class="testi-initial">SR</div>
+            <div class="testi-meta"><div class="name">S.R様</div><div class="who">40代・会社員</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-controls">
+        <div class="testi-dots" id="testi-dots"></div>
+        <div class="testi-nav">
+          <span class="testi-count"><span class="cur" id="testi-cur">01</span> / <span id="testi-total">06</span></span>
+          <button class="testi-arrow" id="testi-prev" aria-label="前へ">‹</button>
+          <button class="testi-arrow" id="testi-next" aria-label="次へ">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" data-screen-label="08 FAQ">
+    <div class="section-head">
+      <span class="section-kicker">— FAQ</span>
+      <h2 class="section-title">よくある質問。</h2>
+    </div>
+    <div class="faq-list" id="faq-list">
+    <div class="faq-item" data-i="0">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q01</span>
+        <span class="q-text">初心者でも大丈夫ですか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>はい、全プランで初心者の方が安心して学べるカリキュラムを設計しています。未経験者の方が大半ですので、ご安心ください。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="1">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q02</span>
+        <span class="q-text">3ヶ月プランと6ヶ月プランの違いは何ですか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>6ヶ月プランは3ヶ月プランの全内容に加え、複数チャンネル運用・法人案件獲得・AI自動化パイプライン構築などのプレミアム特典が含まれます。より本格的に事業化を目指す方向けです。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="2">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q03</span>
+        <span class="q-text">買い切り講座と個別コンサルは併用できますか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>はい、併用可能です。買い切り講座で基礎を学びながら、個別コンサルで戦略的なサポートを受けていただけます。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="3">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q04</span>
+        <span class="q-text">支払い方法は何が使えますか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>銀行振込、クレジットカード（一括・分割）をご利用いただけます。分割払いは個別コンサルプランのみ対応しております。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="4">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q05</span>
+        <span class="q-text">分割払いはできますか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>個別コンサルプランに限り、3回・6回・12回の分割払いに対応しております。買い切り講座は一括のみとなります。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="5">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q06</span>
+        <span class="q-text">返金保証はありますか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>商品の性質上、交換・返品は受け付けておりません。ご購入前に内容を十分ご確認いただくか、無料相談をご活用ください。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="6">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q07</span>
+        <span class="q-text">個別コンサルはオンラインですか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>はい、Zoom等のビデオ通話ツールを使用したオンラインで実施します。全国どこからでもご受講いただけます。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="7">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q08</span>
+        <span class="q-text">収益化は本当に達成できますか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>受講生の大半が収益化を達成しています。ただし、個人の取り組み状況により異なりますので、取り組みの熱量も合わせて重要です。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="8">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q09</span>
+        <span class="q-text">どれくらいの時間を確保する必要がありますか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>目安として、買い切り講座は週3〜5時間、個別コンサルプランは週5〜10時間の学習・実践時間を想定しています。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="9">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q10</span>
+        <span class="q-text">すでにチャンネルを持っていますが大丈夫ですか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>はい、既存チャンネルの分析・改善サポートも可能です。現状に応じた最適な戦略をご提案します。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="10">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q11</span>
+        <span class="q-text">法人契約や経費処理は可能ですか？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>はい、法人契約・請求書発行・領収書発行、全て対応可能です。お申込みフォームの法人名欄にご記入ください。</div>
+      </div>
+    </div>
+  
+    <div class="faq-item" data-i="11">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q12</span>
+        <span class="q-text">申込後の流れは？</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>お申込み → 決済 → オリエンテーション → 受講開始という流れです。お申込みから24時間以内にご連絡いたします。</div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- FORM -->
+  <section id="form-section" data-screen-label="09 Form">
+    <div class="section-head">
+      <span class="section-kicker">— APPLICATION</span>
+      <h2 class="section-title">お申し込み・<br>ご相談フォーム。</h2>
+      <p class="section-sub">下記フォームよりお申し込みください。24時間以内にご連絡いたします。</p>
+    </div>
+
+    <div class="form-intro">
+      <div class="form-intro-label">SELECTED PLAN</div>
+      <div class="form-intro-text" id="selected-plan-text">プランを選択してください</div>
+    </div>
+
+    <form onsubmit="event.preventDefault(); alert('これはデモフォームです。送信機能は未実装です。');">
+      <!-- プラン選択 -->
+      <div class="field-group">
+        <div class="field-label">プラン選択 <span class="req">必須</span></div>
+        <div class="radio-group" id="plan-radio">
+          <label class="radio">
+            <input type="radio" name="plan" value="course">
+            <span class="radio-dot"></span>
+            <span class="radio-content">
+              <div class="main">AI Creative講座（買い切り）</div>
+              <div class="sub">¥49,800</div>
+            </span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="plan" value="youtube-3m">
+            <span class="radio-dot"></span>
+            <span class="radio-content">
+              <div class="main">YouTube収益化プラン（3ヶ月）</div>
+              <div class="sub">¥330,000</div>
+            </span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="plan" value="youtube-6m">
+            <span class="radio-dot"></span>
+            <span class="radio-content">
+              <div class="main">YouTube総合コンサルプラン（6ヶ月）</div>
+              <div class="sub">¥550,000</div>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- お支払い方法 -->
+      <div class="field-group">
+        <div class="field-label">お支払い方法 <span class="req">必須</span></div>
+        <div class="radio-group">
+          <label class="radio">
+            <input type="radio" name="payment">
+            <span class="radio-dot"></span>
+            <span class="radio-content">
+              <div class="main">クレジットカード一括</div>
+            </span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="payment">
+            <span class="radio-dot"></span>
+            <span class="radio-content">
+              <div class="main">クレジットカード分割</div>
+              <div class="sub">3回 / 6回 / 12回 ※個別コンサルのみ</div>
+            </span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="payment">
+            <span class="radio-dot"></span>
+            <span class="radio-content">
+              <div class="main">銀行振込</div>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- お名前 -->
+      <div class="field-group">
+        <div class="field-label">お名前 <span class="req">必須</span></div>
+        <div class="field-row">
+          <input type="text" class="input" placeholder="姓">
+          <input type="text" class="input" placeholder="名">
+        </div>
+      </div>
+
+      <!-- フリガナ -->
+      <div class="field-group">
+        <div class="field-label">フリガナ <span class="req">必須</span></div>
+        <div class="field-row">
+          <input type="text" class="input" placeholder="セイ">
+          <input type="text" class="input" placeholder="メイ">
+        </div>
+      </div>
+
+      <!-- メールアドレス -->
+      <div class="field-group">
+        <div class="field-label">メールアドレス <span class="req">必須</span></div>
+        <input type="email" class="input" placeholder="example@email.com">
+      </div>
+
+      <!-- 電話番号 -->
+      <div class="field-group">
+        <div class="field-label">電話番号 <span class="req">必須</span></div>
+        <input type="tel" class="input" placeholder="090-0000-0000">
+      </div>
+
+      <!-- ご住所 -->
+      <div class="field-group">
+        <div class="field-label">ご住所 <span class="req">必須</span></div>
+        <input type="text" class="input" placeholder="〒 郵便番号">
+        <input type="text" class="input" placeholder="都道府県・市区町村">
+        <input type="text" class="input" placeholder="番地・建物名">
+      </div>
+
+      <!-- 生年月日 -->
+      <div class="field-group">
+        <div class="field-label">生年月日 <span class="opt">任意</span></div>
+        <input type="text" class="input" placeholder="YYYY / MM / DD">
+      </div>
+
+      <!-- 法人名 -->
+      <div class="field-group">
+        <div class="field-label">法人名・部署 <span class="opt">任意</span></div>
+        <input type="text" class="input" placeholder="株式会社○○ / ○○部">
+      </div>
+
+      <!-- 現在の状況 -->
+      <div class="field-group">
+        <div class="field-label">現在の状況 <span class="opt">複数可</span></div>
+        <div class="check-group">
+          <label class="check"><input type="checkbox"><span class="check-box"></span><span>YouTube未経験</span></label>
+          <label class="check"><input type="checkbox"><span class="check-box"></span><span>YouTube運用中（〜1000人）</span></label>
+          <label class="check"><input type="checkbox"><span class="check-box"></span><span>YouTube運用中（1000人〜）</span></label>
+          <label class="check"><input type="checkbox"><span class="check-box"></span><span>法人として検討</span></label>
+          <label class="check"><input type="checkbox"><span class="check-box"></span><span>AI動画制作経験あり</span></label>
+          <label class="check"><input type="checkbox"><span class="check-box"></span><span>完全初心者</span></label>
+        </div>
+      </div>
+
+      <!-- 相談 -->
+      <div class="field-group">
+        <div class="field-label">相談したいこと・質問 <span class="opt">任意</span></div>
+        <textarea class="textarea" placeholder="ご自由にお書きください"></textarea>
+      </div>
+
+      <!-- 同意 -->
+      <div class="agreement">
+        <label class="check"><input type="checkbox"><span class="check-box"></span><span><a style="color: var(--accent-gold); text-decoration: underline;">利用規約</a> に同意する</span></label>
+        <label class="check"><input type="checkbox"><span class="check-box"></span><span><a href="https://utage-system.com/page/rd8UUlL7PmVR" target="_blank" rel="noopener" style="color: var(--accent-gold); text-decoration: underline;">プライバシーポリシー</a> に同意する</span></label>
+        <label class="check"><input type="checkbox"><span class="check-box"></span><span><a href="https://utage-system.com/page/zyawhAhPMdig" target="_blank" rel="noopener" style="color: var(--accent-gold); text-decoration: underline;">特定商取引法に基づく表記</a> を確認した</span></label>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="submit-btn">
+        お申し込み内容を確認する <span class="btn-arrow">→</span>
+      </button>
+
+      <div class="trust-row">
+        <div class="trust"><span class="trust-ico">🔒</span>SSL暗号化通信で保護されています</div>
+        <div class="trust"><span class="trust-ico">🏦</span>決済はStripe社のセキュアな環境で処理</div>
+        <div class="trust"><span class="trust-ico">✉</span>24時間以内にご連絡いたします</div>
+      </div>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-screen-label="10 Footer">
+    <div class="foot-logo">AI CREATIVE ACADEMY</div>
+    <div class="foot-info">
+      <div><span class="label">販売事業者</span>平山 加菜</div>
+      <div><span class="label">所在地</span>大阪市北区天神橋3丁目7-26-905</div>
+      <div><span class="label">電話番号</span>090-2784-9747</div>
+      <div><span class="label">E-MAIL</span>kanamasa5655@gmail.com</div>
+    </div>
+    <div class="foot-links">
+      <a href="https://utage-system.com/page/zyawhAhPMdig" target="_blank" rel="noopener">特定商取引法に基づく表記</a>
+      <a href="https://utage-system.com/page/rd8UUlL7PmVR" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a href="#">利用規約</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <div class="foot-copy">©2026 AI CREATIVE ACADEMY</div>
+  </footer>
+</div>
+
+<!-- TWEAKS PANEL -->
+<div class="tweaks-panel active" id="tweaks-panel">
+  <div class="tweaks-title">
+    <span>TWEAKS</span>
+    <button onclick="toggleTweaks(false)" style="color: var(--text-dim); font-size: 14px;">×</button>
+  </div>
+  <div class="tweaks-label">Hero Layout</div>
+  <div class="tweaks-options">
+    <button class="tweaks-btn" data-layout="left">LEFT</button>
+    <button class="tweaks-btn active" data-layout="center">CENTER</button>
+    <button class="tweaks-btn" data-layout="split">SPLIT</button>
+  </div>
+</div>
+
+<script>
+/* ============ TWEAKS ============ */
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "heroLayout": "left"
+}/*EDITMODE-END*/;
+
+let tweakState = { ...TWEAK_DEFAULTS };
+
+function applyTweaks() {
+  document.getElementById('hero').setAttribute('data-layout', tweakState.heroLayout);
+  document.querySelectorAll('.tweaks-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-layout') === tweakState.heroLayout);
+  });
+}
+
+function toggleTweaks(on) {
+  document.getElementById('tweaks-panel').classList.toggle('active', on);
+}
+
+window.addEventListener('message', (e) => {
+  if (!e.data) return;
+  if (e.data.type === '__activate_edit_mode') toggleTweaks(true);
+  if (e.data.type === '__deactivate_edit_mode') toggleTweaks(false);
+});
+try { window.parent.postMessage({type: '__edit_mode_available'}, '*'); } catch(e) {}
+
+document.querySelectorAll('.tweaks-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    tweakState.heroLayout = btn.getAttribute('data-layout');
+    applyTweaks();
+    try {
+      window.parent.postMessage({type: '__edit_mode_set_keys', edits: {heroLayout: tweakState.heroLayout}}, '*');
+    } catch(e) {}
+  });
+});
+applyTweaks();
+
+/* ============ PARTICLES ============ */
+(function setupParticles() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = rect.width; h = rect.height;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.scale(dpr, dpr);
+    spawn();
+  }
+  function spawn() {
+    particles = [];
+    const count = Math.min(60, Math.floor((w * h) / 8000));
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        r: Math.random() * 1.6 + 0.3,
+        a: Math.random() * 0.5 + 0.2,
+        hue: Math.random() > 0.7 ? 'gold' : 'white',
+      });
+    }
+  }
+  function tick() {
+    ctx.clearRect(0, 0, w, h);
+    // connections
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 90) {
+          ctx.strokeStyle = `rgba(212, 175, 55, ${(1 - d/90) * 0.08})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
+        }
+      }
+    }
+    // dots
+    for (const p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      if (p.hue === 'gold') {
+        ctx.fillStyle = `rgba(212, 175, 55, ${p.a})`;
+      } else {
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.a * 0.5})`;
+      }
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  tick();
+})();
+
+/* ============ TESTIMONIALS CAROUSEL ============ */
+(function setupTestiCarousel() {
+  const track = document.getElementById('testi-track');
+  if (!track) return;
+  const cards = track.querySelectorAll('.testi');
+  const dotsWrap = document.getElementById('testi-dots');
+  const prev = document.getElementById('testi-prev');
+  const next = document.getElementById('testi-next');
+  const curEl = document.getElementById('testi-cur');
+  const totalEl = document.getElementById('testi-total');
+  const total = cards.length;
+  totalEl.textContent = String(total).padStart(2, '0');
+
+  // build dots
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('button');
+    d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `スライド ${i+1}`);
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+  }
+
+  let current = 0;
+  function goTo(i) {
+    i = Math.max(0, Math.min(total - 1, i));
+    cards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    // note: scrollIntoView can mess up page; use track.scrollTo instead
+  }
+  function goToSafe(i) {
+    i = Math.max(0, Math.min(total - 1, i));
+    const card = cards[i];
+    const left = card.offsetLeft - track.offsetLeft;
+    track.scrollTo({ left, behavior: 'smooth' });
+  }
+  prev.addEventListener('click', () => goToSafe(current - 1));
+  next.addEventListener('click', () => goToSafe(current + 1));
+
+  function updateActive() {
+    const scrollLeft = track.scrollLeft;
+    let best = 0, bestDist = Infinity;
+    cards.forEach((c, i) => {
+      const d = Math.abs(c.offsetLeft - track.offsetLeft - scrollLeft);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    if (best !== current) {
+      current = best;
+      cards.forEach((c, i) => c.classList.toggle('is-active', i === best));
+      dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === best));
+      curEl.textContent = String(best + 1).padStart(2, '0');
+      prev.disabled = best === 0;
+      next.disabled = best === total - 1;
+    }
+  }
+  track.addEventListener('scroll', () => {
+    window.requestAnimationFrame(updateActive);
+  });
+  // override goTo used by dots to use safe version
+  dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => {
+    d.onclick = () => goToSafe(i);
+  });
+  cards[0].classList.add('is-active');
+  prev.disabled = true;
+})();
+
+/* ============ FAQ ============ */
+const faqs = [
+  { q: '初心者でも大丈夫ですか？', a: 'はい、全プランで初心者の方が安心して学べるカリキュラムを設計しています。未経験者の方が大半ですので、ご安心ください。' },
+  { q: '3ヶ月プランと6ヶ月プランの違いは何ですか？', a: '6ヶ月プランは3ヶ月プランの全内容に加え、複数チャンネル運用・法人案件獲得・AI自動化パイプライン構築などのプレミアム特典が含まれます。より本格的に事業化を目指す方向けです。' },
+  { q: '買い切り講座と個別コンサルは併用できますか？', a: 'はい、併用可能です。買い切り講座で基礎を学びながら、個別コンサルで戦略的なサポートを受けていただけます。' },
+  { q: '支払い方法は何が使えますか？', a: '銀行振込、クレジットカード（一括・分割）をご利用いただけます。分割払いは個別コンサルプランのみ対応しております。' },
+  { q: '分割払いはできますか？', a: '個別コンサルプランに限り、3回・6回・12回の分割払いに対応しております。買い切り講座は一括のみとなります。' },
+  { q: '返金保証はありますか？', a: '商品の性質上、交換・返品は受け付けておりません。ご購入前に内容を十分ご確認いただくか、無料相談をご活用ください。' },
+  { q: '個別コンサルはオンラインですか？', a: 'はい、Zoom等のビデオ通話ツールを使用したオンラインで実施します。全国どこからでもご受講いただけます。' },
+  { q: '収益化は本当に達成できますか？', a: '受講生の大半が収益化を達成しています。ただし、個人の取り組み状況により異なりますので、取り組みの熱量も合わせて重要です。' },
+  { q: 'どれくらいの時間を確保する必要がありますか？', a: '目安として、買い切り講座は週3〜5時間、個別コンサルプランは週5〜10時間の学習・実践時間を想定しています。' },
+  { q: 'すでにチャンネルを持っていますが大丈夫ですか？', a: 'はい、既存チャンネルの分析・改善サポートも可能です。現状に応じた最適な戦略をご提案します。' },
+  { q: '法人契約や経費処理は可能ですか？', a: 'はい、法人契約・請求書発行・領収書発行、全て対応可能です。お申込みフォームの法人名欄にご記入ください。' },
+  { q: '申込後の流れは？', a: 'お申込み → 決済 → オリエンテーション → 受講開始という流れです。お申込みから24時間以内にご連絡いたします。' },
+];
+const faqList = document.getElementById('faq-list');
+faqs.forEach((f, i) => {
+  faqList.insertAdjacentHTML('beforeend', `
+    <div class="faq-item" data-i="${i}">
+      <button class="faq-q" type="button">
+        <span class="q-label">Q${String(i+1).padStart(2,'0')}</span>
+        <span class="q-text">${f.q}</span>
+        <span class="q-toggle"></span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner"><span class="a-label">A.</span>${f.a}</div>
+      </div>
+    </div>
+  `);
+});
+faqList.addEventListener('click', (e) => {
+  const btn = e.target.closest('.faq-q');
+  if (!btn) return;
+  const item = btn.closest('.faq-item');
+  const open = item.classList.toggle('open');
+  const a = item.querySelector('.faq-a');
+  a.style.maxHeight = open ? a.scrollHeight + 'px' : '0px';
+});
+
+/* ============ PLAN SELECTION ============ */
+const planLabels = {
+  'course': 'AI Creative講座（¥49,800）',
+  'youtube-3m': 'YouTube収益化プラン（¥330,000）',
+  'youtube-6m': 'YouTube総合コンサルプラン（¥550,000）',
+};
+document.querySelectorAll('[data-select-plan]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const plan = btn.getAttribute('data-select-plan');
+    // set radio
+    const radios = document.querySelectorAll('input[name="plan"]');
+    radios.forEach(r => r.checked = r.value === plan);
+    // update radio visuals
+    document.querySelectorAll('#plan-radio .radio').forEach(r => {
+      r.classList.toggle('selected', r.querySelector('input').checked);
+    });
+    document.getElementById('selected-plan-text').textContent = planLabels[plan];
+    document.getElementById('form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+document.querySelectorAll('input[name="plan"]').forEach(input => {
+  input.addEventListener('change', () => {
+    document.querySelectorAll('#plan-radio .radio').forEach(r => {
+      r.classList.toggle('selected', r.querySelector('input').checked);
+    });
+    if (input.checked) {
+      document.getElementById('selected-plan-text').textContent = planLabels[input.value];
+    }
+  });
+});
+
+/* ============ REVEAL ============ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.plan-card, .reason, .testi, .road, .pain-item, .detail-block').forEach(el => {
+  el.classList.add('reveal');
+  io.observe(el);
+});
+</script>
+
+
+
+</body></html>
