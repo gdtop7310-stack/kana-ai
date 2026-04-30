@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Creative Academy｜画像・動画・音声AIスクール</title>
-<meta name="description" content="最新AIツールを全て学べる実践型オンラインスクール。YouTube収益化から個別コンサルまで、目的に合わせて選べる3つのプラン。">
+<meta name="description" content="最新AIツールを全て学べる実践型オンラインスクール。月額1,980円のメンバーシップからYouTube収益化・個別コンサルまで、目的に合わせて選べる4つのプラン。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&amp;family=Montserrat:wght@500;700;800&amp;display=swap">
@@ -1165,7 +1165,7 @@
         <span class="br accent">次のステージへ。</span>
       </h1>
       <p class="hero-sub">
-        画像生成・動画生成・音声生成 — 最新AIツールを全て学べる、実践型オンラインスクール。目的に合わせて選べる3つのプランで、初心者から法人まで。
+        画像生成・動画生成・音声生成 — 最新AIツールを全て学べる、実践型オンラインスクール。目的に合わせて選べる4つのプランで、初心者から法人まで。
       </p>
       <div class="hero-cta">
         <a href="#plans" class="btn btn-primary">
@@ -1192,11 +1192,30 @@
   <section id="plans" data-screen-label="02 Plans">
     <div class="section-head">
       <span class="section-kicker">— PLANS</span>
-      <h2 class="section-title">3つのプランから、<br>最適な学びを。</h2>
-      <p class="section-sub">独学で始めたい方から、本格的な個別コンサルまで。目的とゴールに合わせて選べる3つのプランをご用意しています。</p>
+      <h2 class="section-title">4つのプランから、<br>最適な学びを。</h2>
+      <p class="section-sub">月額メンバーシップから、本格的な個別コンサルまで。目的とゴールに合わせて選べる4つのプランをご用意しています。</p>
     </div>
 
     <div class="plan-cards">
+      <!-- Plan 0 (Monthly Membership) -->
+      <div class="plan-card reveal in" data-plan="monthly">
+        <span class="plan-badge">月額メンバーシップ</span>
+        <h3 class="plan-name">月額サポートプラン</h3>
+        <p class="plan-tagline">いつでも始められる月額制</p>
+        <div class="plan-price">
+          <span class="yen">¥</span>
+          <span class="amount">1,980</span>
+          <span class="tax">tax in</span>
+        </div>
+        <div class="plan-period">MONTHLY MEMBERSHIP</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span>アーカイブのチェック</li>
+          <li><span class="check">✓</span>月2回の勉強会</li>
+          <li><span class="check">✓</span>動画の添削サポート</li>
+        </ul>
+        <button class="plan-cta" data-select-plan="monthly">このプランで申し込む</button>
+      </div>
+
       <!-- Plan 1 -->
       <div class="plan-card reveal in" data-plan="course">
         <span class="plan-badge">入門・独学向け</span>
@@ -1661,6 +1680,14 @@
         <div class="field-label">プラン選択 <span class="req">必須</span></div>
         <div class="radio-group" id="plan-radio">
           <label class="radio">
+            <input type="radio" name="plan" value="monthly">
+            <span class="radio-dot"></span>
+            <span class="radio-content">
+              <div class="main">月額サポートプラン</div>
+              <div class="sub">¥1,980 / 月</div>
+            </span>
+          </label>
+          <label class="radio">
             <input type="radio" name="plan" value="course">
             <span class="radio-dot"></span>
             <span class="radio-content">
@@ -2051,6 +2078,7 @@ faqList.addEventListener('click', (e) => {
 
 /* ============ PLAN SELECTION ============ */
 const planLabels = {
+  'monthly': '月額サポートプラン（¥1,980 / 月）',
   'course': 'AI Creative講座（¥49,800）',
   'youtube-3m': 'YouTube収益化プラン（¥330,000）',
   'youtube-6m': 'YouTube総合コンサルプラン（¥550,000）',
