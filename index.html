@@ -93,24 +93,53 @@
   /* ---------- HERO ---------- */
   .hero {
     position: relative;
-    padding: 64px 22px 72px;
+    padding: 72px 22px 76px;
     overflow: hidden;
     min-height: 640px;
+    isolation: isolate;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0) 22%),
+      var(--bg-primary);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.72), transparent 70%);
+    opacity: 0.45;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    top: 18px;
+    height: 1px;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.55), transparent);
   }
   .hero-canvas {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    z-index: 0;
+    z-index: 1;
   }
   .hero-gradient {
     position: absolute; inset: 0;
     background:
-      radial-gradient(circle at 70% 20%, rgba(212, 175, 55, 0.10), transparent 45%),
-      radial-gradient(circle at 20% 90%, rgba(255, 107, 53, 0.08), transparent 50%),
+      radial-gradient(ellipse at 50% 10%, rgba(245, 217, 125, 0.16), transparent 42%),
+      radial-gradient(circle at 78% 34%, rgba(212, 175, 55, 0.10), transparent 36%),
+      radial-gradient(circle at 18% 82%, rgba(255, 107, 53, 0.08), transparent 45%),
       linear-gradient(180deg, rgba(10, 14, 26, 0) 0%, rgba(10, 14, 26, 0.6) 80%, var(--bg-primary) 100%);
-    z-index: 1; pointer-events: none;
+    z-index: 2; pointer-events: none;
   }
-  .hero-inner { position: relative; z-index: 2; }
+  .hero-inner { position: relative; z-index: 3; }
 
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
@@ -118,10 +147,13 @@
     font-size: 10px; font-weight: 600;
     letter-spacing: 0.22em; color: var(--accent-gold);
     text-transform: uppercase;
-    padding: 6px 12px;
+    padding: 7px 13px;
     border: 1px solid var(--accent-gold-dim);
     border-radius: 100px;
-    background: rgba(212, 175, 55, 0.04);
+    background: rgba(10, 14, 26, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 14px 36px -24px rgba(212,175,55,0.7);
   }
   .hero-eyebrow::before {
     content: ""; width: 5px; height: 5px; border-radius: 50%;
@@ -130,24 +162,40 @@
   }
 
   .hero h1 {
-    font-size: 32px;
+    font-size: 34px;
     font-weight: 900;
-    line-height: 1.45;
+    line-height: 1.34;
     margin: 22px 0 20px;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
+    text-shadow: 0 18px 46px rgba(0,0,0,0.42);
   }
   .hero h1 .br { display: block; }
   .hero h1 .accent {
-    background: linear-gradient(135deg, #F5D97D 0%, var(--accent-gold) 100%);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 4px;
+    background: linear-gradient(100deg, #FFF3B0 0%, #D4AF37 54%, #FF8255 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+  .hero h1 .accent::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.85), transparent);
+    box-shadow: 0 0 18px rgba(212,175,55,0.45);
   }
   .hero-sub {
     color: var(--text-muted);
     font-size: 13.5px;
     line-height: 1.85;
     margin-bottom: 32px;
+    max-width: 33em;
     text-wrap: pretty;
   }
 
@@ -163,15 +211,17 @@
     overflow: hidden;
   }
   .btn-primary {
-    background: var(--accent-orange);
+    background: linear-gradient(135deg, #FF7548 0%, #F0B84B 100%);
     color: #fff;
-    box-shadow: 0 10px 28px -12px rgba(255, 107, 53, 0.5);
+    box-shadow: 0 16px 36px -18px rgba(255, 107, 53, 0.7), inset 0 1px 0 rgba(255,255,255,0.25);
   }
   .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 32px -10px rgba(255, 107, 53, 0.6); }
   .btn-ghost {
-    background: transparent;
+    background: rgba(255,255,255,0.025);
     color: var(--text-primary);
     border: 1px solid var(--border-subtle);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
   .btn-ghost:hover { border-color: var(--accent-gold); color: var(--accent-gold); }
   .btn-arrow { transition: transform 0.3s var(--ease); }
@@ -180,12 +230,15 @@
   .hero-visual {
     margin-top: 40px;
     aspect-ratio: 4 / 3;
-    border-radius: 14px;
-    border: 1px solid var(--border-subtle);
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.24);
     background: #000;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.08);
+    box-shadow:
+      0 24px 70px -24px rgba(0,0,0,0.75),
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 0 46px -26px rgba(212,175,55,0.9);
   }
   .hero-visual video {
     width: 100%; height: 100%;
@@ -195,9 +248,20 @@
   .hero-visual::before {
     content: "";
     position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 55%, rgba(10,14,26,0.7) 100%);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.08), transparent 24%),
+      linear-gradient(180deg, transparent 50%, rgba(10,14,26,0.76) 100%);
     pointer-events: none;
     z-index: 2;
+  }
+  .hero-visual::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 3;
   }
   .hero-visual-tag {
     position: absolute;
@@ -206,7 +270,7 @@
     font-size: 9px;
     letter-spacing: 0.25em;
     color: var(--accent-gold);
-    z-index: 3;
+    z-index: 4;
     display: flex; align-items: center; gap: 8px;
   }
   .hero-visual-tag::before {
@@ -372,6 +436,9 @@
     font-weight: 700;
     transition: all 0.3s var(--ease);
     background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   .plan-cta:hover { background: var(--accent-orange); border-color: var(--accent-orange); }
   .plan-card.featured .plan-cta {
@@ -832,172 +899,6 @@
     margin-right: 8px;
   }
 
-  /* ---------- FORM ---------- */
-  #form-section { background: var(--bg-primary); }
-  .form-intro {
-    background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, transparent 100%);
-    border: 1px solid var(--accent-gold-dim);
-    border-radius: var(--radius);
-    padding: 24px 20px;
-    margin-bottom: 28px;
-    text-align: center;
-  }
-  .form-intro-label {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    color: var(--accent-gold);
-    letter-spacing: 0.25em;
-    margin-bottom: 10px;
-  }
-  .form-intro-text {
-    font-size: 14px;
-    line-height: 1.8;
-  }
-  form { display: flex; flex-direction: column; gap: 24px; }
-  .field-group { display: flex; flex-direction: column; gap: 10px; }
-  .field-label {
-    font-size: 12px;
-    font-weight: 700;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .req {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 9px;
-    color: var(--accent-orange);
-    padding: 2px 6px;
-    border: 1px solid var(--accent-orange);
-    border-radius: 3px;
-    letter-spacing: 0.1em;
-  }
-  .opt {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 9px;
-    color: var(--text-dim);
-    padding: 2px 6px;
-    border: 1px solid var(--border-subtle);
-    border-radius: 3px;
-    letter-spacing: 0.1em;
-  }
-  .radio-group, .check-group { display: flex; flex-direction: column; gap: 8px; }
-  .radio, .check {
-    display: flex; align-items: flex-start; gap: 12px;
-    padding: 14px 16px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.25s var(--ease);
-    font-size: 13px;
-  }
-  .radio:hover, .check:hover { border-color: var(--accent-gold-dim); }
-  .radio input, .check input { display: none; }
-  .radio-dot, .check-box {
-    flex-shrink: 0;
-    width: 18px; height: 18px;
-    border: 1.5px solid var(--border-subtle);
-    margin-top: 2px;
-    position: relative;
-    transition: border-color 0.25s var(--ease);
-  }
-  .radio-dot { border-radius: 50%; }
-  .check-box { border-radius: 4px; }
-  .radio input:checked ~ .radio-dot,
-  .check input:checked ~ .check-box { border-color: var(--accent-orange); }
-  .radio input:checked ~ .radio-dot::after {
-    content: ""; position: absolute;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent-orange);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .check input:checked ~ .check-box::after {
-    content: "✓"; position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--accent-orange);
-    font-size: 12px; font-weight: 700;
-  }
-  .radio-content { flex: 1; }
-  .radio-content .main { font-weight: 500; }
-  .radio-content .sub {
-    font-size: 11px;
-    color: var(--text-dim);
-    font-family: 'Montserrat', sans-serif;
-    margin-top: 2px;
-    letter-spacing: 0.05em;
-  }
-  .radio.selected { border-color: var(--accent-orange); background: rgba(255, 107, 53, 0.05); }
-
-  .input, .textarea, .select {
-    width: 100%;
-    padding: 14px 16px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-family: inherit;
-    font-size: 13px;
-    transition: border-color 0.25s var(--ease);
-  }
-  .input:focus, .textarea:focus, .select:focus {
-    outline: none;
-    border-color: var(--accent-gold);
-  }
-  .input::placeholder, .textarea::placeholder { color: var(--text-dim); }
-  .textarea { resize: vertical; min-height: 100px; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .field-hint {
-    font-size: 10px;
-    color: var(--text-dim);
-    margin-top: 2px;
-  }
-
-  .agreement {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .agreement .check { background: transparent; border: none; padding: 8px 0; }
-  .agreement .check:hover { border-color: transparent; }
-
-  .submit-btn {
-    width: 100%;
-    padding: 20px;
-    background: var(--accent-orange);
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    border-radius: var(--radius);
-    box-shadow: 0 10px 28px -12px rgba(255, 107, 53, 0.55);
-    transition: all 0.3s var(--ease);
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-  }
-  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 32px -10px rgba(255, 107, 53, 0.65); }
-  .trust-row {
-    margin-top: 22px;
-    display: flex; flex-direction: column; gap: 12px;
-    padding: 18px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-soft);
-    border-radius: 8px;
-  }
-  .trust {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-  .trust-ico {
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    background: rgba(212, 175, 55, 0.1);
-    color: var(--accent-gold);
-    display: grid; place-items: center;
-    font-size: 10px;
-    flex-shrink: 0;
-  }
-
   /* ---------- FOOTER ---------- */
   footer {
     background: #06080F;
@@ -1100,9 +1001,12 @@
   /* ---------- HERO LAYOUTS (tweak variants) ---------- */
   /* default: left */
   .hero[data-layout="left"] .hero-inner { text-align: left; }
-  .hero[data-layout="left"] .hero-cta { align-items: stretch; }
+  .hero[data-layout="left"] .hero-cta { align-items: stretch; max-width: 320px; }
 
   .hero[data-layout="center"] .hero-inner { text-align: center; }
+  .hero[data-layout="center"] .hero-sub,
+  .hero[data-layout="center"] .hero-cta { margin-left: auto; margin-right: auto; }
+  .hero[data-layout="center"] .hero-cta { max-width: 320px; }
   .hero[data-layout="center"] .hero-stats { text-align: center; }
   .hero[data-layout="center"] .hero-visual { margin-left: auto; margin-right: auto; max-width: 280px; }
 
@@ -1162,7 +1066,7 @@
       <h1>
         <span class="br">AIで、あなたの</span>
         <span class="br">ビジネスを</span>
-        <span class="br accent">次のステージへ。</span>
+        <span class="br accent">次のフェーズへ。</span>
       </h1>
       <p class="hero-sub">
         画像生成・動画生成・音声生成 — 最新AIツールを全て学べる、実践型オンラインスクール。目的に合わせて選べる4つのプランで、初心者から法人まで。
@@ -1171,8 +1075,8 @@
         <a href="#plans" class="btn btn-primary">
           プランを見る <span class="btn-arrow">→</span>
         </a>
-        <a href="#form-section" class="btn btn-ghost">
-          無料相談する
+        <a href="#plans" class="btn btn-ghost">
+          プランを選ぶ
         </a>
       </div>
       <div class="hero-visual">
@@ -1213,7 +1117,7 @@
           <li><span class="check">✓</span>月2回の勉強会</li>
           <li><span class="check">✓</span>動画の添削サポート</li>
         </ul>
-        <button class="plan-cta" data-select-plan="monthly">このプランで申し込む</button>
+        <a class="plan-cta" href="https://univa.cc/5_rVEw">このプランで申し込む</a>
       </div>
 
       <!-- Plan 1 -->
@@ -1234,7 +1138,7 @@
           <li><span class="check">✓</span>スマホ視聴OK</li>
           <li><span class="check">✓</span>受講生コミュニティ招待</li>
         </ul>
-        <button class="plan-cta" data-select-plan="course">このプランで申し込む</button>
+        <a class="plan-cta" href="https://univa.cc/EOnnCI">このプランで申し込む</a>
       </div>
 
       <!-- Plan 2 (Featured) -->
@@ -1256,7 +1160,7 @@
           <li><span class="check">✓</span>AI動画制作ツール完全レクチャー</li>
           <li><span class="check">✓</span>収益化達成までフルサポート</li>
         </ul>
-        <button class="plan-cta" data-select-plan="youtube-3m">このプランで申し込む</button>
+        <a class="plan-cta" href="https://univa.cc/aC8Ggp">このプランで申し込む</a>
       </div>
 
       <!-- Plan 3 -->
@@ -1277,7 +1181,7 @@
           <li><span class="check">✓</span>収益最大化・スケーリング戦略</li>
           <li><span class="check">✓</span>3ヶ月プランの全内容を含む</li>
         </ul>
-        <button class="plan-cta" data-select-plan="youtube-6m">このプランで申し込む</button>
+        <a class="plan-cta" href="https://univa.cc/r2wu4F">このプランで申し込む</a>
       </div>
     </div>
   </section>
@@ -1644,7 +1548,7 @@
         <span class="q-toggle"></span>
       </button>
       <div class="faq-a">
-        <div class="faq-a-inner"><span class="a-label">A.</span>はい、法人契約・請求書発行・領収書発行、全て対応可能です。お申込みフォームの法人名欄にご記入ください。</div>
+        <div class="faq-a-inner"><span class="a-label">A.</span>はい、法人契約・請求書発行・領収書発行、全て対応可能です。お申し込み後に個別にご案内いたします。</div>
       </div>
     </div>
   
@@ -1659,177 +1563,6 @@
       </div>
     </div>
   </div>
-  </section>
-
-  <!-- FORM -->
-  <section id="form-section" data-screen-label="09 Form">
-    <div class="section-head">
-      <span class="section-kicker">— APPLICATION</span>
-      <h2 class="section-title">お申し込み・<br>ご相談フォーム。</h2>
-      <p class="section-sub">下記フォームよりお申し込みください。24時間以内にご連絡いたします。</p>
-    </div>
-
-    <div class="form-intro">
-      <div class="form-intro-label">SELECTED PLAN</div>
-      <div class="form-intro-text" id="selected-plan-text">プランを選択してください</div>
-    </div>
-
-    <form onsubmit="event.preventDefault(); alert('これはデモフォームです。送信機能は未実装です。');">
-      <!-- プラン選択 -->
-      <div class="field-group">
-        <div class="field-label">プラン選択 <span class="req">必須</span></div>
-        <div class="radio-group" id="plan-radio">
-          <label class="radio">
-            <input type="radio" name="plan" value="monthly">
-            <span class="radio-dot"></span>
-            <span class="radio-content">
-              <div class="main">月額サポートプラン</div>
-              <div class="sub">¥1,980 / 月</div>
-            </span>
-          </label>
-          <label class="radio">
-            <input type="radio" name="plan" value="course">
-            <span class="radio-dot"></span>
-            <span class="radio-content">
-              <div class="main">AI Creative講座（買い切り）</div>
-              <div class="sub">¥49,800</div>
-            </span>
-          </label>
-          <label class="radio">
-            <input type="radio" name="plan" value="youtube-3m">
-            <span class="radio-dot"></span>
-            <span class="radio-content">
-              <div class="main">YouTube収益化プラン（3ヶ月）</div>
-              <div class="sub">¥330,000</div>
-            </span>
-          </label>
-          <label class="radio">
-            <input type="radio" name="plan" value="youtube-6m">
-            <span class="radio-dot"></span>
-            <span class="radio-content">
-              <div class="main">YouTube総合コンサルプラン（6ヶ月）</div>
-              <div class="sub">¥550,000</div>
-            </span>
-          </label>
-        </div>
-      </div>
-
-      <!-- お支払い方法 -->
-      <div class="field-group">
-        <div class="field-label">お支払い方法 <span class="req">必須</span></div>
-        <div class="radio-group">
-          <label class="radio">
-            <input type="radio" name="payment">
-            <span class="radio-dot"></span>
-            <span class="radio-content">
-              <div class="main">クレジットカード一括</div>
-            </span>
-          </label>
-          <label class="radio">
-            <input type="radio" name="payment">
-            <span class="radio-dot"></span>
-            <span class="radio-content">
-              <div class="main">クレジットカード分割</div>
-              <div class="sub">3回 / 6回 / 12回 ※個別コンサルのみ</div>
-            </span>
-          </label>
-          <label class="radio">
-            <input type="radio" name="payment">
-            <span class="radio-dot"></span>
-            <span class="radio-content">
-              <div class="main">銀行振込</div>
-            </span>
-          </label>
-        </div>
-      </div>
-
-      <!-- お名前 -->
-      <div class="field-group">
-        <div class="field-label">お名前 <span class="req">必須</span></div>
-        <div class="field-row">
-          <input type="text" class="input" placeholder="姓">
-          <input type="text" class="input" placeholder="名">
-        </div>
-      </div>
-
-      <!-- フリガナ -->
-      <div class="field-group">
-        <div class="field-label">フリガナ <span class="req">必須</span></div>
-        <div class="field-row">
-          <input type="text" class="input" placeholder="セイ">
-          <input type="text" class="input" placeholder="メイ">
-        </div>
-      </div>
-
-      <!-- メールアドレス -->
-      <div class="field-group">
-        <div class="field-label">メールアドレス <span class="req">必須</span></div>
-        <input type="email" class="input" placeholder="example@email.com">
-      </div>
-
-      <!-- 電話番号 -->
-      <div class="field-group">
-        <div class="field-label">電話番号 <span class="req">必須</span></div>
-        <input type="tel" class="input" placeholder="090-0000-0000">
-      </div>
-
-      <!-- ご住所 -->
-      <div class="field-group">
-        <div class="field-label">ご住所 <span class="req">必須</span></div>
-        <input type="text" class="input" placeholder="〒 郵便番号">
-        <input type="text" class="input" placeholder="都道府県・市区町村">
-        <input type="text" class="input" placeholder="番地・建物名">
-      </div>
-
-      <!-- 生年月日 -->
-      <div class="field-group">
-        <div class="field-label">生年月日 <span class="opt">任意</span></div>
-        <input type="text" class="input" placeholder="YYYY / MM / DD">
-      </div>
-
-      <!-- 法人名 -->
-      <div class="field-group">
-        <div class="field-label">法人名・部署 <span class="opt">任意</span></div>
-        <input type="text" class="input" placeholder="株式会社○○ / ○○部">
-      </div>
-
-      <!-- 現在の状況 -->
-      <div class="field-group">
-        <div class="field-label">現在の状況 <span class="opt">複数可</span></div>
-        <div class="check-group">
-          <label class="check"><input type="checkbox"><span class="check-box"></span><span>YouTube未経験</span></label>
-          <label class="check"><input type="checkbox"><span class="check-box"></span><span>YouTube運用中（〜1000人）</span></label>
-          <label class="check"><input type="checkbox"><span class="check-box"></span><span>YouTube運用中（1000人〜）</span></label>
-          <label class="check"><input type="checkbox"><span class="check-box"></span><span>法人として検討</span></label>
-          <label class="check"><input type="checkbox"><span class="check-box"></span><span>AI動画制作経験あり</span></label>
-          <label class="check"><input type="checkbox"><span class="check-box"></span><span>完全初心者</span></label>
-        </div>
-      </div>
-
-      <!-- 相談 -->
-      <div class="field-group">
-        <div class="field-label">相談したいこと・質問 <span class="opt">任意</span></div>
-        <textarea class="textarea" placeholder="ご自由にお書きください"></textarea>
-      </div>
-
-      <!-- 同意 -->
-      <div class="agreement">
-        <label class="check"><input type="checkbox"><span class="check-box"></span><span><a style="color: var(--accent-gold); text-decoration: underline;">利用規約</a> に同意する</span></label>
-        <label class="check"><input type="checkbox"><span class="check-box"></span><span><a href="https://utage-system.com/page/rd8UUlL7PmVR" target="_blank" rel="noopener" style="color: var(--accent-gold); text-decoration: underline;">プライバシーポリシー</a> に同意する</span></label>
-        <label class="check"><input type="checkbox"><span class="check-box"></span><span><a href="https://utage-system.com/page/zyawhAhPMdig" target="_blank" rel="noopener" style="color: var(--accent-gold); text-decoration: underline;">特定商取引法に基づく表記</a> を確認した</span></label>
-      </div>
-
-      <!-- Submit -->
-      <button type="submit" class="submit-btn">
-        お申し込み内容を確認する <span class="btn-arrow">→</span>
-      </button>
-
-      <div class="trust-row">
-        <div class="trust"><span class="trust-ico">🔒</span>SSL暗号化通信で保護されています</div>
-        <div class="trust"><span class="trust-ico">🏦</span>決済はStripe社のセキュアな環境で処理</div>
-        <div class="trust"><span class="trust-ico">✉</span>24時間以内にご連絡いたします</div>
-      </div>
-    </form>
   </section>
 
   <!-- FOOTER -->
@@ -1868,7 +1601,7 @@
 <script>
 /* ============ TWEAKS ============ */
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "heroLayout": "left"
+  "heroLayout": "center"
 }/*EDITMODE-END*/;
 
 let tweakState = { ...TWEAK_DEFAULTS };
@@ -2049,7 +1782,7 @@ const faqs = [
   { q: '収益化は本当に達成できますか？', a: '受講生の大半が収益化を達成しています。ただし、個人の取り組み状況により異なりますので、取り組みの熱量も合わせて重要です。' },
   { q: 'どれくらいの時間を確保する必要がありますか？', a: '目安として、買い切り講座は週3〜5時間、個別コンサルプランは週5〜10時間の学習・実践時間を想定しています。' },
   { q: 'すでにチャンネルを持っていますが大丈夫ですか？', a: 'はい、既存チャンネルの分析・改善サポートも可能です。現状に応じた最適な戦略をご提案します。' },
-  { q: '法人契約や経費処理は可能ですか？', a: 'はい、法人契約・請求書発行・領収書発行、全て対応可能です。お申込みフォームの法人名欄にご記入ください。' },
+  { q: '法人契約や経費処理は可能ですか？', a: 'はい、法人契約・請求書発行・領収書発行、全て対応可能です。お申し込み後に個別にご案内いたします。' },
   { q: '申込後の流れは？', a: 'お申込み → 決済 → オリエンテーション → 受講開始という流れです。お申込みから24時間以内にご連絡いたします。' },
 ];
 const faqList = document.getElementById('faq-list');
@@ -2074,39 +1807,6 @@ faqList.addEventListener('click', (e) => {
   const open = item.classList.toggle('open');
   const a = item.querySelector('.faq-a');
   a.style.maxHeight = open ? a.scrollHeight + 'px' : '0px';
-});
-
-/* ============ PLAN SELECTION ============ */
-const planLabels = {
-  'monthly': '月額サポートプラン（¥1,980 / 月）',
-  'course': 'AI Creative講座（¥49,800）',
-  'youtube-3m': 'YouTube収益化プラン（¥330,000）',
-  'youtube-6m': 'YouTube総合コンサルプラン（¥550,000）',
-};
-document.querySelectorAll('[data-select-plan]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const plan = btn.getAttribute('data-select-plan');
-    // set radio
-    const radios = document.querySelectorAll('input[name="plan"]');
-    radios.forEach(r => r.checked = r.value === plan);
-    // update radio visuals
-    document.querySelectorAll('#plan-radio .radio').forEach(r => {
-      r.classList.toggle('selected', r.querySelector('input').checked);
-    });
-    document.getElementById('selected-plan-text').textContent = planLabels[plan];
-    document.getElementById('form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
-
-document.querySelectorAll('input[name="plan"]').forEach(input => {
-  input.addEventListener('change', () => {
-    document.querySelectorAll('#plan-radio .radio').forEach(r => {
-      r.classList.toggle('selected', r.querySelector('input').checked);
-    });
-    if (input.checked) {
-      document.getElementById('selected-plan-text').textContent = planLabels[input.value];
-    }
-  });
 });
 
 /* ============ REVEAL ============ */
